@@ -44,10 +44,35 @@ output/
 assets/
 .tmp/
 
-# 项目说明在私有知识库维护，不进入公开仓库。
-/docs/
-/skills/
+# 详细项目说明留在私有知识库；只公开执行必需的通用规则和示例。
+/docs/*
+/skills/*
 *.md
+!/AGENTS.md
+!/CLAUDE.md
+!/docs/运行准备.md
+!/docs/内容规范.md
+!/docs/选题策略.md
+!/docs/执行流程.md
+!/docs/表达检测与复核.md
+!/skills/wechat-human-writing/
+/skills/wechat-human-writing/*
+!/skills/wechat-human-writing/SKILL.md
+!/skills/wechat-human-writing/references/
+/skills/wechat-human-writing/references/*
+!/skills/wechat-human-writing/references/author-voice.md
+!/skills/humanizer-zh/
+/skills/humanizer-zh/*
+!/skills/humanizer-zh/SKILL.md
+!/skills/humanizer-zh/LICENSE
+!/skills/wechat-publication/
+/skills/wechat-publication/*
+!/skills/wechat-publication/SKILL.md
+!/examples/account/AGENTS.md
+!/examples/account/账号定位.md
+!/examples/tasks/每日任务.md
+!/examples/draft/article.md
+!/examples/draft/internal-audit/source-audit.md
 !LICENSE
 /vault/
 /reports/

@@ -1,5 +1,6 @@
 {
-  "name": "wechat-official-account-starter",
+  "name": "jushou",
+  "description": "巨手：公众号内容运营系统",
   "version": "1.0.0",
   "private": true,
   "type": "module",
