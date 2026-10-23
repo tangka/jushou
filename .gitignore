@@ -1,0 +1,64 @@
+# 依赖
+node_modules/
+
+# TS 构建产物(ADR 0006:tsc → dist/)
+dist/
+
+# 登录态 / SQLite / 本地数据(勿提交)
+.data/
+
+# X 采集关注清单按账号放 vault(<账号>/watchlist.json);项目根若被 x-collect 生成默认副本则忽略
+/watchlist.json
+
+# 环境变量(含 NOTIFY_WEBHOOK_URL 等密钥)
+.env
+.env.*
+!.env.example
+# 统一个人配置:账号凭据、授权、部署与品牌设置仅在本机保存
+/operator.local.json
+/operator.local.*.json
+
+# 日志
+*.log
+
+# 本地临时抓取/草稿产物
+/_*.md
+/_*.json
+/drafts/
+
+# 系统 / 编辑器
+.DS_Store
+.idea/
+.vscode/
+
+# Claude Code 本地运行态(定时锁等)
+.claude/
+
+# 海报收款码(真实收款二维码,勿入库;脚本入库,图本地放 scripts/poster/assets/)
+scripts/poster/assets/
+videos/
+templates/
+output/
+.playwright-cli/
+.pnpm-store/
+assets/
+.tmp/
+
+# 项目说明在私有知识库维护，不进入公开仓库。
+/docs/
+/skills/
+*.md
+!LICENSE
+/vault/
+/reports/
+/coverage/
+*.local.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.har

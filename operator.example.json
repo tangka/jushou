@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "env": {
+    "OBSIDIAN_VAULT": "/absolute/path/to/your-vault",
+    "SYNC_DAILY_AT": "off",
+    "WECHAT_REQUEST_INTERVAL_MS": "1500"
+  },
+  "accounts": [
+    {
+      "id": "example",
+      "envAccount": "",
+      "name": "示例公众号",
+      "aliases": [],
+      "env": {
+        "WECHAT_ACCOUNT_EXACT": "示例公众号",
+        "WECHAT_ACCOUNT_KEYWORD": "示例公众号",
+        "WECHAT_APPID": "",
+        "WECHAT_APPSECRET": ""
+      },
+      "policy": {
+        "dailyPublication": "draft",
+        "newsOnly": false,
+        "miniProgram": {
+          "required": false
+        }
+      },
+      "editorial": {
+        "authorVoice": "使用自己的作者口吻；事实与个人经历须有依据。",
+        "authorVoiceReview": "保留有效的作者表达，核对事实，删除无作用套话。"
+      }
+    }
+  ],
+  "runtime": {
+    "pathEntries": [],
+    "nodeExecutable": "",
+    "chromePath": "",
+    "xCollectDir": "",
+    "webCollectDir": ""
+  },
+  "remoteUpload": {
+    "host": "",
+    "directory": "",
+    "sshOptions": []
+  },
+  "branding": {
+    "visual": {
+      "brand": "",
+      "avatarPath": ""
+    },
+    "posters": {
+      "group": {},
+      "learning": {},
+      "aiNative": {}
+    }
+  },
+  "resources": {
+    "materialRoots": [],
+    "feishu": {},
+    "x": {}
+  },
+  "business": {
+    "appletMembershipImports": [],
+    "goalsGuidance": ""
+  },
+  "operations": {
+    "timezone": "Asia/Shanghai",
+    "dailySchedule": "off",
+    "writingEngine": "codex-main-session",
+    "draftEngine": "codex",
+    "publicationAuthorization": ""
+  }
+}

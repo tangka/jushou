@@ -1,0 +1,46 @@
+# 多账号自托管:单 service 暴露 3333,页面通过 ?account=<配置名> 在多份 .env* 间切换。
+# 完全隔离:共享 .data 卷,但库/登录态/KV 文件名按账号派生(stats-<账号>.db / login-state-<账号>.json / kv-<账号>);
+#           共享 vault 卷,但各号落 <账号>/ 子目录。首次扫码统一打开 localhost:3333,再在页面切号登录。
+# 私有值从 operator.local.json 读取；使用 pnpm docker -- up -d 解析宿主挂载路径。
+
+# 公共配置(卷 / 宿主访问 / 重启策略)
+x-woa-common: &woa-common
+  build: .
+  extra_hosts:
+    - 'host.docker.internal:host-gateway' # 容器内经此访问宿主(给打标的代理用)
+  volumes:
+    - ./.data:/app/.data
+    - ${WECHAT_ENV_DIR_HOST:-.}:/app-env:ro
+    - ${OBSIDIAN_VAULT_HOST:?请通过 pnpm docker 提供私有配置中的 Vault 路径}:/vault
+    - ${WECHAT_OPERATOR_PROFILE_HOST:?请通过 pnpm docker 提供私有配置路径}:/app-private/operator.local.json:ro
+  restart: unless-stopped
+
+# 公共环境变量(各号共享:库根 / 时区 / 同步时刻 / 打标 key / 通知)
+# 注意:不设 STATS_DB / NITRO_KV_BASE / WECHAT_LOGIN_STATE → 按账号自动派生(多号隔离的关键)
+x-woa-env: &woa-env
+  OBSIDIAN_VAULT: /vault
+  WECHAT_ENV_DIR: /app-env
+  WECHAT_OPERATOR_PROFILE: /app-private/operator.local.json
+  # 容器默认 UTC;TZ 设上海。
+  TZ: ${TZ:-Asia/Shanghai}
+  # off:容器只服务看板/登录,不自己定时同步——同步交给本机 launchd(10:30 + 16:30,可跑视频号/Reddit 等需 Chrome 的步骤)
+  SYNC_DAILY_AT: ${SYNC_DAILY_AT:-off}
+  WECHAT_REFRESH_DAYS: ${WECHAT_REFRESH_DAYS:-30}
+  OPENROUTER_PROXY: http://host.docker.internal:7897
+
+services:
+  woa:
+    <<: *woa-common
+    ports:
+      - '3333:3333'
+    environment:
+      <<: *woa-env
+      PORT: '3333'
+
+  # 文字稿排版:doocs/md 微信 Markdown 编辑器(开源)。把 待发布/*.md 粘进来 → 选主题 → 复制进公众号。
+  # 独立前端镜像(非本仓 build);自定义主题/CSS 在 app 内配置、存浏览器,无需挂载卷。
+  md:
+    image: doocs/md:latest
+    ports:
+      - '8080:80'
+    restart: unless-stopped

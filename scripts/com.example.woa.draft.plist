@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>{{LABEL}}</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>{{REPO}}/scripts/daily-draft.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    {{CALENDAR_INTERVALS}}
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict><key>WECHAT_OPERATOR_PROFILE</key><string>{{PROFILE}}</string></dict>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>{{REPO}}/.data/launchd-draft-stdout.log</string>
+  <key>StandardErrorPath</key>
+  <string>{{REPO}}/.data/launchd-draft-stderr.log</string>
+</dict>
+</plist>

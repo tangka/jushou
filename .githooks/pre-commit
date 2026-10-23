@@ -1,0 +1,4 @@
+#!/bin/sh
+# 提交前硬卡(代码质量):① 单文件 ≤500 行 ② biome lint(含未用 import/变量=error)
+node scripts/check-line-limit.mjs || exit 1
+pnpm lint || { echo "✗ biome lint 未通过(含未用代码);修掉再提交。"; exit 1; }
